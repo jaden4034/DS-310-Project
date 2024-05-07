@@ -1,0 +1,21 @@
+{
+	"name": "policy_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "challenge2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "policy.parquet",
+				"fileSystem": "ods"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

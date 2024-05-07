@@ -1,0 +1,49 @@
+{
+	"name": "countries_dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "sqldb_country_parquet_copy1",
+						"type": "DatasetReference"
+					},
+					"name": "sqldbcountrydataflow"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "geography_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "countrysink"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Country as string,",
+				"          CountryCode as string,",
+				"          Latitude as decimal(10,5),",
+				"          Longitude as decimal(10,5)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> sqldbcountrydataflow",
+				"sqldbcountrydataflow sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     partitionFileNames:['Geography.parquet'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> countrysink"
+			]
+		}
+	}
+}

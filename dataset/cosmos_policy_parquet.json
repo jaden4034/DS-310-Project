@@ -1,0 +1,21 @@
+{
+	"name": "cosmos_policy_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "data_34aa72af-17a3-407d-b97e-b72985627d0d_a12c4efd-3e6f-4a61-9b53-ed33baa8b6c8.parquet",
+				"fileSystem": "azurecdbsource"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
